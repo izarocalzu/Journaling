@@ -28,29 +28,34 @@
                     <TextBox Watermark="Título"
                              Width="200"
                              Margin="10"
-                             HorizontalAlignment="Center" />
+                             HorizontalAlignment="Center"
+                             Text="{Binding Cancion.Titulo}"/>
                     <!-- ÁLBUM -->
                     <TextBox Grid.Column="1"
                              Watermark="Álbum"
                              Margin="10"
-                             Width="200" />
+                             Width="200"
+                             Text="{Binding Cancion.Album}"/>
                     <!-- NOTA -->
                     <NumericUpDown Grid.Column="2" Minimum="0" Maximum="10"
                                    Watermark="Nota"
                                    Width="200"
                                    Margin="10"
-                                   HorizontalAlignment="Center" />
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding Cancion.Nota}"/>
                 </Grid>
                 <Grid ColumnDefinitions="*,*,*">
                     <!-- ARTISTA -->
                     <TextBox Grid.Column="0" Watermark="Artista"
                              Width="200"
                              Margin="0"
-                             HorizontalAlignment="Center" />
+                             HorizontalAlignment="Center"
+                             Text="{Binding Cancion.Artista}"/>
                     <!-- SELECTOR DE FECHA -->
                     <CalendarDatePicker Grid.Column="1" HorizontalAlignment="Center"
                                         Margin="0"
-                                        Width="200">
+                                        Width="200"
+                                        SelectedDate="{Binding Cancion.Fecha}">
                         <Interaction.Behaviors>
                             <EventTriggerBehavior EventName="SelectedDateChanged">
                                 <InvokeCommandAction Command="{Binding }" />
