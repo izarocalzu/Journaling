@@ -54,7 +54,7 @@
                             </EventTriggerBehavior>
                         </Interaction.Behaviors>
                     </CalendarDatePicker>
-                    <!-- ANOTAR 
+                    <!-- ANOTAR -->
                 <CheckBox Grid.Column="2" HorizontalAlignment="Center"
                           Margin="0"
                           Width="200"
@@ -66,11 +66,11 @@
                             Width="200">
                     <TextBox Margin="5,5,0,5" Width="100"
                              HorizontalAlignment="Center" /> 
-                </StackPanel> -->
+                </StackPanel> 
                 </Grid>
 
                 <Button Width="90"
-                        Margin="10"
+                        Margin="0,50, 0, 0"
                         Content="CREAR"
                         HorizontalAlignment="Center"
                         HorizontalContentAlignment="Center" />
