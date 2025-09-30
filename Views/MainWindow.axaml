@@ -29,11 +29,14 @@
                              Width="200"
                              Margin="10"
                              HorizontalAlignment="Center" />
+                    <!-- ÁLBUM -->
                     <TextBox Grid.Column="1"
                              Watermark="Álbum"
                              Margin="10"
                              Width="200" />
+                    <!-- NOTA -->
                     <NumericUpDown Grid.Column="2" Minimum="0" Maximum="10"
+                                   Watermark="Nota"
                                    Width="200"
                                    Margin="10"
                                    HorizontalAlignment="Center" />
@@ -42,7 +45,7 @@
                     <!-- ARTISTA -->
                     <TextBox Grid.Column="0" Watermark="Artista"
                              Width="200"
-                             Margin="0, 0, 0, 0"
+                             Margin="0"
                              HorizontalAlignment="Center" />
                     <!-- SELECTOR DE FECHA -->
                     <CalendarDatePicker Grid.Column="1" HorizontalAlignment="Center"
@@ -58,10 +61,10 @@
                 <CheckBox Grid.Column="2" HorizontalAlignment="Center"
                           Margin="0"
                           Width="200"
-                          Command="{Binding }"
+                          Command="{Binding MostrarAnotacionesCommand}"
                           Content="Anotaciones" />
                 <StackPanel Grid.Column="2" Orientation="Horizontal"
-                            IsVisible="{Binding }"
+                            IsVisible="{Binding Anotaciones}"
                             HorizontalAlignment="Center"
                             Width="200">
                     <TextBox Margin="5,5,0,5" Width="100"
@@ -73,13 +76,52 @@
                         Margin="0,50, 0, 0"
                         Content="CREAR"
                         HorizontalAlignment="Center"
-                        HorizontalContentAlignment="Center" />
+                        HorizontalContentAlignment="Center"
+                        IsVisible="{Binding ModoCrear}"
+                        Command="{Binding MostrarCancionCommand}"/>
             </StackPanel>
             <!-- FIN DEL CONTENEDOR DEL FORMULARIO -->
         </Border>
 
         <!-- INICIO DEL CONTENEDOR DE CONSULTAS-->
-        
+        <StackPanel>
+            <ListBox Background="Transparent"
+                     Height="350"
+                     SelectedItem="{Binding CancionSeleccionada}"
+                     ItemsSource="{Binding Canciones, Mode=TwoWay}"
+                     >
+    
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="5"
+                                Padding="10"
+                                Width="150"
+                                Height="120"
+                                CornerRadius="5"
+                                BorderBrush="Gray"
+                                BorderThickness="1">
+                            <StackPanel>
+                                <TextBlock FontSize="14"
+                                           FontWeight="Bold"
+                                           Text="{Binding Titulo}"/> 
+                    
+                                <TextBlock FontSize="12"
+                                           Foreground="DimGray"
+                                           Text="{Binding Artista}"/>
+                    
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+    
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+            </ListBox>
+        </StackPanel>
         <!-- FIN DEL CONTENEDOR DE CONSULTAS-->
     </UniformGrid>
 
