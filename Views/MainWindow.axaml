@@ -157,9 +157,10 @@
                                 BoxShadow="7 5 7 0 #3A3F44"
                                 BorderThickness="1">
                             <StackPanel>
-                                <Image Source="avares://Journaling/Assets/Images/appleMusic.webp"
+                                <Image Source="{Binding Caratula}"
                                        Width="70"
                                        Height="50"/>
+                                <!-- Source="avares://Journaling/Assets/Images/appleMusic.jpg" -->
                                 <TextBlock FontSize="14"
                                            FontWeight="Bold"
                                            Margin="0,2,0,0"

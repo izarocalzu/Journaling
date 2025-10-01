@@ -41,6 +41,7 @@ public partial class MainWindowViewModel : ViewModelBase
         cancion1.Album = "One-reeler / Act IV - EP";
         cancion1.Fecha = new DateTime(2020,12,07);
         cancion1.Nota = "8.2";
+        cancion1.Caratula = "avares://Journaling/Assets/Images/panorama.jpeg";
         Canciones.Add(cancion1);
         
         var cancion2 = new Cancion();
