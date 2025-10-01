@@ -8,5 +8,5 @@ public class Cancion
     public string Artista { get; set; } = string.Empty;
     public string Album { get; set; } = string.Empty;
     public string Nota { get; set; } = string.Empty;
-    public DateTime Fecha { get; set; }
+    public DateTime Fecha { get; set; } = DateTime.Today;
 }

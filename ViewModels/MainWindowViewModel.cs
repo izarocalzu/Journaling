@@ -13,7 +13,7 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private string mensaje  = string.Empty;
     public string Titulo { get; } = "SONGS JOURNAL";
-    public string Saludo { get; } = "¡Añade tus canciones favoritas!";
+    public string Saludo { get; } = "Añade tus canciones favoritas";
     
     [ObservableProperty] private Cancion cancion = new();
     

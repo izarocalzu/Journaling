@@ -7,22 +7,31 @@
         x:Class="Journaling.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="Journaling">
+        Title="Journaling"
+        Background="#F8F4EA">
 
     <UniformGrid Rows="2">
+        <!-- LINEA -->
         <Border Margin="30"
                 Padding="13"
                 CornerRadius="10"
-                BorderBrush="Black"
+                BorderBrush="#3A3F44"
                 BorderThickness="1.5"
                 BoxShadow="15 5 10 0 DarkGray">
             <!-- INICIO DEL CONTENEDOR DEL FORMULARIO -->
             <StackPanel>
                 <TextBlock Text="{Binding Titulo}"
-                           HorizontalAlignment="Center" />
+                           HorizontalAlignment="Center"
+                           Foreground="#3A3F44"
+                           FontSize="40"
+                           FontWeight="SemiBold"
+                           FontFamily="avares://Journaling/Assets/Fonts/Bright.otf#Bright"/>
                 <TextBlock Text="{Binding Saludo}"
                            HorizontalAlignment="Center"
-                           VerticalAlignment="Center" />
+                           VerticalAlignment="Center"
+                           Foreground="#889E81"
+                           FontSize="20"
+                           FontFamily="avares://Journaling/Assets/Fonts/Hendangan.ttf#Hendangan"/>
                 <Grid ColumnDefinitions="*,*,*">
                     <!-- TÍTULO -->
                     <TextBox Watermark="Título"
@@ -67,23 +76,27 @@
                           Margin="0"
                           Width="200"
                           Command="{Binding MostrarAnotacionesCommand}"
-                          Content="Anotaciones" />
-                <StackPanel Grid.Column="2" Orientation="Horizontal"
+                          Content="Anotaciones"/>
+                
+                </Grid>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,10,0,0"
                             IsVisible="{Binding Anotaciones}"
                             HorizontalAlignment="Center"
                             Width="200">
-                    <TextBox Margin="5,5,0,5" Width="100"
+                    <TextBox Width="100"
+                             Watermark="Anotaciones"
                              HorizontalAlignment="Center" /> 
                 </StackPanel> 
-                </Grid>
-
+                <!-- BOTÓN CREAR -->
                 <Button Width="90"
                         Margin="0,50, 0, 0"
                         Content="CREAR"
                         HorizontalAlignment="Center"
                         HorizontalContentAlignment="Center"
                         IsVisible="{Binding ModoCrear}"
-                        Command="{Binding MostrarCancionCommand}"/>
+                        Command="{Binding MostrarCancionCommand}"
+                        Background="#A3B18A"/>
             </StackPanel>
             <!-- FIN DEL CONTENEDOR DEL FORMULARIO -->
         </Border>
