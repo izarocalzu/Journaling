@@ -17,7 +17,7 @@
                 CornerRadius="10"
                 BorderBrush="#3A3F44"
                 BorderThickness="1.5"
-                BoxShadow="15 5 10 0 DarkGray">
+                BoxShadow="15 5 10 0 #3A3F44">
             <!-- INICIO DEL CONTENEDOR DEL FORMULARIO -->
             <StackPanel>
                 <TextBlock Text="{Binding Titulo}"
@@ -25,7 +25,8 @@
                            Foreground="#3A3F44"
                            FontSize="40"
                            FontWeight="SemiBold"
-                           FontFamily="avares://Journaling/Assets/Fonts/Bright.otf#Bright"/>
+                           FontFamily="avares://Journaling/Assets/Fonts/Bright.otf#Bright"
+                           />
                 <TextBlock Text="{Binding Saludo}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
@@ -61,15 +62,17 @@
                              HorizontalAlignment="Center"
                              Text="{Binding Cancion.Artista}"/>
                     <!-- SELECTOR DE FECHA -->
+                    <TextBlock Grid.Column="1"
+                               Text="{Binding Lanzamiento}"
+                               FontSize="12"
+                               TextAlignment="Right"
+                               Margin="0,0,8,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"/>
                     <CalendarDatePicker Grid.Column="1" HorizontalAlignment="Center"
                                         Margin="0"
                                         Width="200"
                                         SelectedDate="{Binding Cancion.Fecha}">
-                        <Interaction.Behaviors>
-                            <EventTriggerBehavior EventName="SelectedDateChanged">
-                                <InvokeCommandAction Command="{Binding }" />
-                            </EventTriggerBehavior>
-                        </Interaction.Behaviors>
                     </CalendarDatePicker>
                     <!-- ANOTAR -->
                 <CheckBox Grid.Column="2" HorizontalAlignment="Center"
@@ -86,17 +89,41 @@
                             Width="200">
                     <TextBox Width="100"
                              Watermark="Anotaciones"
-                             HorizontalAlignment="Center" /> 
+                             HorizontalAlignment="Right" /> 
                 </StackPanel> 
                 <!-- BOTÓN CREAR -->
-                <Button Width="90"
-                        Margin="0,50, 0, 0"
+                <Button Width="120"
+                        Height="34"
+                        Margin="0,30, 0, 0"
                         Content="CREAR"
                         HorizontalAlignment="Center"
                         HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
                         IsVisible="{Binding ModoCrear}"
                         Command="{Binding MostrarCancionCommand}"
+                        Background="#A3B18A"
+                        FontSize="17"
+                        FontFamily="avares://Journaling/Assets/Fonts/Nexa-ExtraLight.ttf#Nexa"/>
+                <Grid>
+                <!-- BOTÓN EDITAR -->
+                <Button Width="120"
+                        Margin="0,30, 150, 0"
+                        Content="EDITAR"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        IsVisible="{Binding ModoEditar}"
+                        Command="{Binding EditarCancionCommand}"
                         Background="#A3B18A"/>
+                <!-- BOTÓN CANCELAR -->
+                <Button Width="120"
+                        Margin="150,30, 0, 0"
+                        Content="CANCELAR"
+                        HorizontalAlignment="Center"
+                        HorizontalContentAlignment="Center"
+                        IsVisible="{Binding ModoEditar}"
+                        Command="{Binding CancelarEdicionCommand}"
+                        Background="#DCE5D8"/>
+                </Grid>
             </StackPanel>
             <!-- FIN DEL CONTENEDOR DEL FORMULARIO -->
         </Border>
@@ -108,19 +135,34 @@
                      SelectedItem="{Binding CancionSeleccionada}"
                      ItemsSource="{Binding Canciones, Mode=TwoWay}"
                      >
-    
+                <Interaction.Behaviors>
+                    <EventTriggerBehavior EventName="DoubleTapped">
+                        <InvokeCommandAction Command="{Binding CargarCancionSeleccionadaCommand}"/>
+                    </EventTriggerBehavior>
+                </Interaction.Behaviors>
+                
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Margin="5"
+                        <Border Margin="2"
                                 Padding="10"
                                 Width="150"
-                                Height="120"
+                                Height="100"
                                 CornerRadius="5"
-                                BorderBrush="Gray"
+                                BorderBrush="#3A3F44"
+                                BoxShadow="7 5 7 0 #3A3F44"
                                 BorderThickness="1">
                             <StackPanel>
+                                <Image Source="avares://Journaling/Assets/Images/appleMusic.webp"
+                                       Width="70"
+                                       Height="50"/>
                                 <TextBlock FontSize="14"
                                            FontWeight="Bold"
+                                           Margin="0,2,0,0"
                                            Text="{Binding Titulo}"/> 
                     
                                 <TextBlock FontSize="12"
@@ -132,11 +174,6 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
     
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
 
             </ListBox>
         </StackPanel>

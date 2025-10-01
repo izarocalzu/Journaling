@@ -13,7 +13,8 @@ public partial class MainWindowViewModel : ViewModelBase
     [ObservableProperty]
     private string mensaje  = string.Empty;
     public string Titulo { get; } = "SONGS JOURNAL";
-    public string Saludo { get; } = "Añade tus canciones favoritas";
+    public string Saludo { get; } = "Agrega tus canciones favoritas";
+    public string Lanzamiento { get; } = "Fecha de\nLanzamiento";
     
     [ObservableProperty] private Cancion cancion = new();
     
@@ -39,6 +40,7 @@ public partial class MainWindowViewModel : ViewModelBase
         cancion1.Artista = "IZ*ONE";
         cancion1.Album = "One-reeler / Act IV - EP";
         cancion1.Fecha = new DateTime(2020,12,07);
+        cancion1.Nota = "8.2";
         Canciones.Add(cancion1);
         
         var cancion2 = new Cancion();
@@ -46,6 +48,7 @@ public partial class MainWindowViewModel : ViewModelBase
         cancion2.Artista = "Billie Eilish";
         cancion2.Album = "WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?";
         cancion2.Fecha = new DateTime(2019,01,30);
+        cancion2.Nota = "7";
         Canciones.Add(cancion2);
         
         var cancion3 = new Cancion();
@@ -53,6 +56,7 @@ public partial class MainWindowViewModel : ViewModelBase
         cancion3.Artista = "Sabrina Carpenter";
         cancion3.Album = "Short n' Sweet (Deluxe)";
         cancion3.Fecha = new DateTime(2024,08,23);
+        cancion3.Nota = "6.7";
         Canciones.Add(cancion3);
         
     }
@@ -85,5 +89,27 @@ public partial class MainWindowViewModel : ViewModelBase
     public void MostrarAnotaciones()
     {
         Anotaciones = !Anotaciones;
+    }
+    
+    [RelayCommand]
+    public void CargarCancionSeleccionada()
+    {
+        Cancion = CancionSeleccionada;
+        ModoCrear = false;
+        ModoEditar = true;
+    }
+
+    [RelayCommand]
+    public void EditarCancion()
+    {
+        Cancion = CancionSeleccionada;
+    }
+
+    [RelayCommand]
+    public void CancelarEdicion()
+    {
+        Cancion = new Cancion();
+        ModoEditar = false;
+        ModoCrear = true;
     }
 }

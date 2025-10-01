@@ -9,4 +9,5 @@ public class Cancion
     public string Album { get; set; } = string.Empty;
     public string Nota { get; set; } = string.Empty;
     public DateTime Fecha { get; set; } = DateTime.Today;
+    public string Caratula { get; set; } = string.Empty;
 }
