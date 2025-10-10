@@ -40,7 +40,8 @@ public partial class MainWindowViewModel : ViewModelBase
         cancion1.Artista = "IZ*ONE";
         cancion1.Album = "One-reeler / Act IV - EP";
         cancion1.Fecha = new DateTime(2020,12,07);
-        cancion1.Nota = "8.2";
+        cancion1.Calificacion = "8.2";
+        cancion1.Anotaciones = "Canción de disband :(";
         cancion1.Caratula = "avares://Journaling/Assets/Images/panorama.jpeg";
         Canciones.Add(cancion1);
         
@@ -49,7 +50,8 @@ public partial class MainWindowViewModel : ViewModelBase
         cancion2.Artista = "Billie Eilish";
         cancion2.Album = "WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?";
         cancion2.Fecha = new DateTime(2019,01,30);
-        cancion2.Nota = "7";
+        cancion2.Calificacion = "7";
+        cancion2.Anotaciones = "";
         Canciones.Add(cancion2);
         
         var cancion3 = new Cancion();
@@ -57,7 +59,8 @@ public partial class MainWindowViewModel : ViewModelBase
         cancion3.Artista = "Sabrina Carpenter";
         cancion3.Album = "Short n' Sweet (Deluxe)";
         cancion3.Fecha = new DateTime(2024,08,23);
-        cancion3.Nota = "6.7";
+        cancion3.Calificacion = "6.7";
+        cancion3.Anotaciones = "Gracias a Fortnite me gusta esta canción";
         Canciones.Add(cancion3);
         
     }
@@ -77,7 +80,8 @@ public partial class MainWindowViewModel : ViewModelBase
                 Titulo = Cancion.Titulo,
                 Artista = Cancion.Artista,
                 Album = Cancion.Album,
-                Nota = Cancion.Nota,
+                Calificacion = Cancion.Calificacion,
+                Anotaciones = Cancion.Anotaciones,
                 Fecha = Cancion.Fecha
             };
             Canciones.Add(nuevaCancion);
@@ -86,16 +90,17 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    [RelayCommand]
+    /*[RelayCommand]
     public void MostrarAnotaciones()
     {
         Anotaciones = !Anotaciones;
-    }
+    }*/
     
     [RelayCommand]
     public void CargarCancionSeleccionada()
     {
         Cancion = CancionSeleccionada;
+        Anotaciones = !string.IsNullOrWhiteSpace(CancionSeleccionada.Anotaciones);
         ModoCrear = false;
         ModoEditar = true;
     }
@@ -112,5 +117,6 @@ public partial class MainWindowViewModel : ViewModelBase
         Cancion = new Cancion();
         ModoEditar = false;
         ModoCrear = true;
+        Anotaciones = false;
     }
 }
