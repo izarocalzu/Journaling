@@ -1,14 +1,28 @@
 using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Journaling.Models;
 
-public class Cancion
+public partial class Cancion : ObservableObject
 {
-    public string Titulo { get; set; } = string.Empty;
-    public string Artista { get; set; } = string.Empty;
-    public string Album { get; set; } = string.Empty;
-    public string Calificacion { get; set; } = string.Empty;
-    public DateTime Fecha { get; set; } = DateTime.Today;
-    public string Anotaciones { get; set; } = string.Empty;
-    public string Caratula { get; set; } = string.Empty;
+    [ObservableProperty]
+    private string titulo = string.Empty;
+
+    [ObservableProperty]
+    private string artista = string.Empty;
+
+    [ObservableProperty]
+    private string album = string.Empty;
+
+    [ObservableProperty]
+    private double calificacion;
+
+    [ObservableProperty]
+    private DateTime fecha = DateTime.Today;
+
+    [ObservableProperty]
+    private string anotaciones = string.Empty;
+
+    //[ObservableProperty]
+    //private string caratula = string.Empty;
 }

@@ -3,8 +3,8 @@
         xmlns:vm="using:Journaling.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Width="1300"
-        mc:Ignorable="d" d:DesignWidth="1300" d:DesignHeight="450"
+        Width="1300" Height=""
+        mc:Ignorable="d" d:DesignWidth="1300" d:DesignHeight="500"
         CanResize="False"
         x:Class="Journaling.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -16,7 +16,7 @@
         <!-- LINEA -->
         <Border Margin="30"
                 Padding="13"
-                CornerRadius="10"
+                CornerRadius="20"
                 BorderBrush="#3A3F44"
                 BorderThickness="1.5"
                 BoxShadow="15 5 10 0 #3A3F44">
@@ -92,15 +92,18 @@
                                  Height="70"
                                  IsVisible="{Binding Anotaciones}"
                                  Text="{Binding Cancion.Anotaciones}"/>
-                        
-                        
                     </Grid>
                 
                 </Grid>
+                <TextBlock Text="{Binding Mensaje}"
+                           Foreground="Red" 
+                           HorizontalAlignment="Center"
+                           Margin="0, 15, 0, 5"
+                           FontWeight="SemiBold"/>
                 <!-- BOTÓN CREAR -->
                 <Button Width="120"
                         Height="34"
-                        Margin="0,30, 0, 0"
+                        Margin="0,5, 0, 0"
                         Content="CREAR"
                         HorizontalAlignment="Center"
                         HorizontalContentAlignment="Center"
@@ -114,22 +117,28 @@
                 <Grid>
                 <!-- BOTÓN EDITAR -->
                 <Button Width="120"
-                        Margin="0,30, 150, 0"
+                        Height="34"
+                        Margin="0,0 , 150, 0"
                         Content="EDITAR"
                         HorizontalAlignment="Center"
                         HorizontalContentAlignment="Center"
                         IsVisible="{Binding ModoEditar}"
                         Command="{Binding EditarCancionCommand}"
-                        Background="#A3B18A"/>
+                        Background="#A3B18A"
+                        FontSize="17"
+                        FontFamily="avares://Journaling/Assets/Fonts/Nexa-ExtraLight.ttf#Nexa"/>
                 <!-- BOTÓN CANCELAR -->
                 <Button Width="120"
-                        Margin="150,30, 0, 0"
+                        Height="34"
+                        Margin="150,0, 0, 0"
                         Content="CANCELAR"
                         HorizontalAlignment="Center"
                         HorizontalContentAlignment="Center"
                         IsVisible="{Binding ModoEditar}"
                         Command="{Binding CancelarEdicionCommand}"
-                        Background="#DCE5D8"/>
+                        Background="#DCE5D8"
+                        FontSize="17"
+                        FontFamily="avares://Journaling/Assets/Fonts/Nexa-ExtraLight.ttf#Nexa"/>
                 </Grid>
             </StackPanel>
             <!-- FIN DEL CONTENEDOR DEL FORMULARIO -->
@@ -138,9 +147,11 @@
         <!-- INICIO DEL CONTENEDOR DE CONSULTAS-->
         <StackPanel>
             <ListBox Background="Transparent"
-                     Height="350"
+                     Height="275"
+                     Width="1300"
                      SelectedItem="{Binding CancionSeleccionada}"
                      ItemsSource="{Binding Canciones, Mode=TwoWay}"
+                     
                      >
                 <Interaction.Behaviors>
                     <EventTriggerBehavior EventName="DoubleTapped">
@@ -150,34 +161,67 @@
                 
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <WrapPanel/>
+                        <WrapPanel HorizontalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border Margin="2"
-                                Padding="10"
-                                Width="150"
-                                Height="100"
-                                CornerRadius="5"
+                        <Border Margin="5"
+                                Padding="12"
+                                Width="200"
+                                Height="200"
+                                CornerRadius="20"
                                 BorderBrush="#3A3F44"
                                 BoxShadow="7 5 7 0 #3A3F44"
-                                BorderThickness="1">
-                            <StackPanel>
-                                <Image Source="{Binding Caratula}"
-                                       Width="70"
-                                       Height="50"/>
-                                <!-- Source="avares://Journaling/Assets/Images/appleMusic.jpg" -->
-                                <TextBlock FontSize="14"
-                                           FontWeight="Bold"
-                                           Margin="0,2,0,0"
-                                           Text="{Binding Titulo}"/> 
-                    
-                                <TextBlock FontSize="12"
-                                           Foreground="DimGray"
-                                           Text="{Binding Artista}"/>
-                    
-                            </StackPanel>
+                                BorderThickness="1"
+                                Background="White">
+                            
+                            <Grid RowDefinitions="Auto, *">
+                                
+                                <Grid Grid.Row="0" ColumnDefinitions="*, Auto">
+                                    
+                                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                        <TextBlock FontSize="15"
+                                                   FontWeight="Bold"
+                                                   Margin="0,0,5,0"
+                                                   Text="{Binding Titulo}"
+                                                   TextTrimming="CharacterEllipsis"/>
+                                        <!-- TextTrimming para que si el texto es demasiado largo, aparezca "..." -->
+                                        <TextBlock FontSize="13"
+                                                   Foreground="DimGray"
+                                                   Margin="0,2,5,0"
+                                                   Text="{Binding Artista}"
+                                                   TextTrimming="CharacterEllipsis"/>
+                                    </StackPanel>
+
+                                    <Border Grid.Column="1"
+                                            Width="30"
+                                            Height="30"
+                                            CornerRadius="15"
+                                            Background="#A3B18A"
+                                            VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Calificacion}"
+                                                   FontSize="16"
+                                                   FontWeight="Bold"
+                                                   Foreground="White"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                                
+                                <Image Grid.Row="1"
+                                       Source="avares://Journaling/Assets/Images/vinilo.jpg"
+                                       Width="165"
+                                       Height="130"
+                                       Stretch="UniformToFill"
+                                       ClipToBounds="True"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Margin="0,10,0,0"/>
+
+
+                                
+                            </Grid>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>

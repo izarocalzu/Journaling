@@ -40,9 +40,10 @@ public partial class MainWindowViewModel : ViewModelBase
         cancion1.Artista = "IZ*ONE";
         cancion1.Album = "One-reeler / Act IV - EP";
         cancion1.Fecha = new DateTime(2020,12,07);
-        cancion1.Calificacion = "8.2";
+        cancion1.Calificacion = 8.2;
         cancion1.Anotaciones = "Canción de disband :(";
-        cancion1.Caratula = "avares://Journaling/Assets/Images/panorama.jpeg";
+        //cancion1.Caratula = DeterminarCaratula(cancion1.Album); 
+        
         Canciones.Add(cancion1);
         
         var cancion2 = new Cancion();
@@ -50,8 +51,9 @@ public partial class MainWindowViewModel : ViewModelBase
         cancion2.Artista = "Billie Eilish";
         cancion2.Album = "WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?";
         cancion2.Fecha = new DateTime(2019,01,30);
-        cancion2.Calificacion = "7";
+        cancion2.Calificacion = 7;
         cancion2.Anotaciones = "";
+        //cancion2.Caratula = DeterminarCaratula(cancion2.Album); 
         Canciones.Add(cancion2);
         
         var cancion3 = new Cancion();
@@ -59,8 +61,9 @@ public partial class MainWindowViewModel : ViewModelBase
         cancion3.Artista = "Sabrina Carpenter";
         cancion3.Album = "Short n' Sweet (Deluxe)";
         cancion3.Fecha = new DateTime(2024,08,23);
-        cancion3.Calificacion = "6.7";
+        cancion3.Calificacion = 6.7;
         cancion3.Anotaciones = "Gracias a Fortnite me gusta esta canción";
+        //cancion3.Caratula = DeterminarCaratula(cancion3.Album); 
         Canciones.Add(cancion3);
         
     }
@@ -70,10 +73,23 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         if (string.IsNullOrWhiteSpace(Cancion.Titulo))
         {
-            Mensaje = "Debes introducir el título";
+            Mensaje = "Se te ha olvidado el título";
+        }
+        else if (string.IsNullOrWhiteSpace(Cancion.Artista))
+        {
+            Mensaje = "¿Y el artista quién es?";
+        }
+        else if (string.IsNullOrWhiteSpace(Cancion.Album))
+        {
+            Mensaje = "¿El álbum me lo invento o qué?";
+        }
+        else if (Cancion.Calificacion == 0)
+        {
+            Mensaje = "No pusiste qué nota le das";
         }
         else
         {
+            //Cancion.Caratula = DeterminarCaratula(Cancion.Album);
             Mensaje = String.Empty;
             var nuevaCancion = new Cancion
             {
@@ -82,7 +98,8 @@ public partial class MainWindowViewModel : ViewModelBase
                 Album = Cancion.Album,
                 Calificacion = Cancion.Calificacion,
                 Anotaciones = Cancion.Anotaciones,
-                Fecha = Cancion.Fecha
+                Fecha = Cancion.Fecha,
+                //Caratula = Cancion.Caratula
             };
             Canciones.Add(nuevaCancion);
             Cancion = new Cancion();
@@ -90,11 +107,23 @@ public partial class MainWindowViewModel : ViewModelBase
         }
     }
 
-    /*[RelayCommand]
-    public void MostrarAnotaciones()
-    {
-        Anotaciones = !Anotaciones;
-    }*/
+    /*private string DeterminarCaratula(string album)
+       {
+           var comparisonType = StringComparison.OrdinalIgnoreCase;
+           if (album.Contains("One-reeler / Act IV - EP", comparisonType))
+           {
+               return "avares://Journaling/Assets/Images/panorama.jpeg"; 
+           }
+           else if (album.Contains("WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?", comparisonType))
+           {
+               return "avares://Journaling/Assets/Images/billie_album.jpg"; 
+           }
+           else if (album.Contains("Short n' Sweet (Deluxe)", comparisonType))
+           {
+               return "avares://Journaling/Assets/Images/sabrina_album.jpg"; 
+           }
+           return "avares://Journaling/Assets/Images/appleMusic.jpg";
+       }*/
     
     [RelayCommand]
     public void CargarCancionSeleccionada()
